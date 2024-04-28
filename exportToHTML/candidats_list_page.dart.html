@@ -1,0 +1,111 @@
+<html>
+<head>
+<title>candidats_list_page.dart</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #bcbec4;}
+.s1 { color: #6aab73;}
+.s2 { color: #bcbec4;}
+.s3 { color: #cf8e6d;}
+.s4 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+candidats_list_page.dart</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">'dart:ui'</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">'package:flutter/cupertino.dart'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">'package:flutter/material.dart'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">'package:flutter/painting.dart'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">'package:flutter/widgets.dart'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">'/models/person_dart.dart'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">'/pages/candidats_form_page.dart'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">'/pages/candidats_page.dart'</span><span class="s2">;</span>
+
+<span class="s3">class </span><span class="s0">CandidatsListPage </span><span class="s3">extends </span><span class="s0">StatefulWidget </span><span class="s2">{</span>
+  <span class="s3">const </span><span class="s0">CandidatsListPage</span><span class="s2">({</span><span class="s3">super</span><span class="s2">.</span><span class="s0">key</span><span class="s2">});</span>
+
+  <span class="s0">@override</span>
+  <span class="s0">State</span><span class="s2">&lt;</span><span class="s0">CandidatsListPage</span><span class="s2">&gt; </span><span class="s0">createState</span><span class="s2">() =&gt; </span><span class="s0">_CandidatsListPageState</span><span class="s2">();</span>
+<span class="s2">}</span>
+
+<span class="s3">class </span><span class="s0">_CandidatsListPageState </span><span class="s3">extends </span><span class="s0">State</span><span class="s2">&lt;</span><span class="s0">CandidatsListPage</span><span class="s2">&gt; {</span>
+  <span class="s0">String name </span><span class="s2">= </span><span class="s1">&quot;&quot;</span><span class="s2">;</span>
+  <span class="s0">bool liked </span><span class="s2">= </span><span class="s3">false</span><span class="s2">;</span>
+  <span class="s0">List</span><span class="s2">&lt;</span><span class="s0">Person</span><span class="s2">&gt; </span><span class="s0">persons </span><span class="s2">= [];</span>
+  <span class="s0">List</span><span class="s2">&lt;</span><span class="s0">Person</span><span class="s2">&gt; </span><span class="s0">candidats </span><span class="s2">= [];</span>
+
+  <span class="s0">@override</span>
+  <span class="s0">Widget build</span><span class="s2">(</span><span class="s0">BuildContext context</span><span class="s2">) {</span>
+    <span class="s3">return </span><span class="s0">Scaffold</span><span class="s2">(</span>
+      <span class="s0">appBar</span><span class="s2">: </span><span class="s0">AppBar</span><span class="s2">(</span>
+        <span class="s0">title</span><span class="s2">: </span><span class="s3">const </span><span class="s0">Text</span><span class="s2">(</span><span class="s1">&quot;Candidats aux élections&quot;</span><span class="s2">),</span>
+       <span class="s4">// backgroundColor:Color(0524),</span>
+        <span class="s0">actions</span><span class="s2">: [</span>
+          <span class="s0">IconButton</span><span class="s2">(</span>
+              <span class="s0">onPressed</span><span class="s2">: () </span><span class="s0">async </span><span class="s2">{</span>
+                <span class="s0">Person person </span><span class="s2">= </span><span class="s0">await Navigator</span><span class="s2">.</span><span class="s0">push</span><span class="s2">(</span>
+                    <span class="s0">context</span><span class="s2">,</span>
+                    <span class="s0">MaterialPageRoute</span><span class="s2">(</span>
+                      <span class="s0">builder</span><span class="s2">: (</span><span class="s0">context</span><span class="s2">) =&gt; </span><span class="s0">CandidatsPage</span><span class="s2">(</span>
+                        <span class="s0">candidats</span><span class="s2">:</span><span class="s0">candidats</span><span class="s2">,</span>
+                      <span class="s2">),</span>
+                    <span class="s2">));</span>
+                <span class="s0">print</span><span class="s2">(</span><span class="s0">person</span><span class="s2">.</span><span class="s0">name</span><span class="s2">);</span>
+                <span class="s0">candidats</span><span class="s2">.</span><span class="s0">remove</span><span class="s2">(</span><span class="s0">person</span><span class="s2">);</span>
+                <span class="s0">setState</span><span class="s2">(() {});</span>
+              <span class="s2">},</span>
+              <span class="s0">icon</span><span class="s2">: </span><span class="s0">Icon</span><span class="s2">(</span><span class="s0">Icons</span><span class="s2">.</span><span class="s0">how_to_vote_outlined</span><span class="s2">))</span>
+        <span class="s2">],</span>
+      <span class="s2">),</span>
+      <span class="s0">body</span><span class="s2">: </span><span class="s0">ListView</span><span class="s2">(</span>
+        <span class="s0">children</span><span class="s2">: </span><span class="s0">persons</span>
+            <span class="s2">.</span><span class="s0">map</span><span class="s2">((</span><span class="s0">person</span><span class="s2">) =&gt; </span><span class="s0">ListTile</span><span class="s2">(</span>
+                  <span class="s0">title</span><span class="s2">: </span><span class="s0">Text</span><span class="s2">(</span><span class="s1">&quot;</span><span class="s2">${</span><span class="s0">person</span><span class="s2">.</span><span class="s0">name</span><span class="s2">} ${</span><span class="s0">person</span><span class="s2">.</span><span class="s0">surname</span><span class="s2">}</span><span class="s1">&quot;</span><span class="s2">),</span>
+                 <span class="s4">// subtitle: Text(&quot;B&quot;),</span>
+                  <span class="s0">leading</span><span class="s2">: </span><span class="s0">Card</span><span class="s2">(),</span>
+                  <span class="s0">trailing</span><span class="s2">: </span><span class="s3">const </span><span class="s0">Icon</span><span class="s2">(</span>
+                    <span class="s0">Icons</span><span class="s2">.</span><span class="s0">face</span><span class="s2">,</span>
+                    <span class="s4">//color: checkIfExists(person) ? Colors.brown : Colors.black,</span>
+                  <span class="s2">),</span>
+                  <span class="s0">onTap</span><span class="s2">: () {</span>
+                    <span class="s0">addCandidats</span><span class="s2">(</span><span class="s0">person</span><span class="s2">);</span>
+                    <span class="s0">setState</span><span class="s2">(() {});</span>
+                  <span class="s2">},</span>
+                <span class="s2">))</span>
+            <span class="s2">.</span><span class="s0">toList</span><span class="s2">(),</span>
+      <span class="s2">),</span>
+      <span class="s0">floatingActionButton</span><span class="s2">: </span><span class="s0">FloatingActionButton</span><span class="s2">(</span>
+        <span class="s0">onPressed</span><span class="s2">: () </span><span class="s0">async </span><span class="s2">{</span>
+          <span class="s0">Person person </span><span class="s2">= </span><span class="s0">await Navigator</span><span class="s2">.</span><span class="s0">push</span><span class="s2">(</span>
+              <span class="s0">context</span><span class="s2">,</span>
+              <span class="s0">MaterialPageRoute</span><span class="s2">(</span>
+                <span class="s0">builder</span><span class="s2">: (</span><span class="s0">context</span><span class="s2">) =&gt; </span><span class="s0">CandidatsFormPage</span><span class="s2">()</span>
+              <span class="s2">));</span>
+
+          <span class="s0">setState</span><span class="s2">(() =&gt; </span><span class="s0">persons</span><span class="s2">.</span><span class="s0">add</span><span class="s2">(</span><span class="s0">person</span><span class="s2">));</span>
+        <span class="s2">},</span>
+        <span class="s0">child</span><span class="s2">: </span><span class="s0">Icon</span><span class="s2">(</span><span class="s0">Icons</span><span class="s2">.</span><span class="s0">mark_email_read_sharp</span><span class="s2">),</span>
+      <span class="s2">),</span>
+    <span class="s2">);</span>
+  <span class="s2">}</span>
+
+  <span class="s0">bool checkIfExists</span><span class="s2">(</span><span class="s0">Person person</span><span class="s2">) {</span>
+    <span class="s3">return </span><span class="s0">candidats</span><span class="s2">.</span><span class="s0">contains</span><span class="s2">(</span><span class="s0">person</span><span class="s2">);</span>
+  <span class="s2">}</span>
+
+  <span class="s3">void </span><span class="s0">addCandidats</span><span class="s2">(</span><span class="s0">Person person</span><span class="s2">) {</span>
+    <span class="s3">if </span><span class="s2">(!</span><span class="s0">checkIfExists</span><span class="s2">(</span><span class="s0">person</span><span class="s2">)) {</span>
+      <span class="s0">candidats</span><span class="s2">.</span><span class="s0">add</span><span class="s2">(</span><span class="s0">person</span><span class="s2">);</span>
+    <span class="s2">} </span><span class="s3">else </span><span class="s2">{</span>
+      <span class="s0">candidats</span><span class="s2">.</span><span class="s0">remove</span><span class="s2">(</span><span class="s0">person</span><span class="s2">);</span>
+    <span class="s2">}</span>
+  <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>
